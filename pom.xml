@@ -125,6 +125,8 @@
               <exclude>**/*runner.java</exclude>
             </includes>
             <testFailureIgnore>true</testFailureIgnore>
+            <useSystemClassLoader>false</useSystemClassLoader>
+            <threadCount>1</threadCount>
           </configuration>
         
         </plugin>
