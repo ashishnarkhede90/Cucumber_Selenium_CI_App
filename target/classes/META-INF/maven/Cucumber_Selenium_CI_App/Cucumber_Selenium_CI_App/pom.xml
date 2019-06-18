@@ -124,6 +124,7 @@
             <includes>
               <exclude>**/*runner.java</exclude>
             </includes>
+            <testFailureIgnore>true</testFailureIgnore>
           </configuration>
         
         </plugin>
