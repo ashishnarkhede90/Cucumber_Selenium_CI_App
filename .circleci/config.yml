@@ -19,6 +19,21 @@ jobs: # a collection of steps
       - run: mvn dependency:go-offline # gets the project dependencies
     
       - run: chmod +x drivers/chromedriver_linux64  
+      # run tests!
+      - run: pwd
+      - run: sudo apt-get install libxss1 libappindicator1 libindicator7
+      - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - run: sudo apt-get update
+      - run: sudo apt-get install -f
+      - run: sudo apt install ./google-chrome*.deb
+      - run:
+          name: Running X virtual framebuffer
+          command: Xvfb :0 -ac &
+
+      - run:
+          name: Run Tests
+          command: |
+            export DISPLAY=:99
 
       - run: ls -lrt drivers/
       - run: sudo chmod 777 drivers/chromedriver_linux64
