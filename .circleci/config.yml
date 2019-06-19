@@ -16,7 +16,8 @@ jobs: # a collection of steps
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: Cucumber_Selenium_CI_App-{{ checksum "pom.xml" }}
       
-      - run: mvn dependency:go-offline # gets the project dependencies
+      # gets the project dependencies
+      - run: mvn dependency:go-offline 
       
       # set up chrome driver
       # - run: chmod +x drivers/chromedriver_linux64 
@@ -40,14 +41,16 @@ jobs: # a collection of steps
       # On CI server, there is no display output for the browser to launch in. To run the tests on a browser loaded in CI server, we need to configure 
       # your tests to launch the browser virtually. X virtual framebuffer is an in-memory display server for UNIX-like operating system (e.g., Linux). 
       # It enables you to run graphical applications without a display (e.g., browser tests on a CI server) while also having the ability to take screenshots.
-      - run:
-          name: Running X virtual framebuffer
-          command: Xvfb :0 -ac &
+      # - run:
+      #     name: Running X virtual framebuffer
+      #     command: Xvfb :0 -ac &
 
-      - run:
-          name: Run Tests
-          command: | # tell the terminal to use a display port
-            export DISPLAY=:99 
+      # - run:
+      #     name: Run Tests
+      #     command: | # tell the terminal to use a display port
+      #       export DISPLAY=:99 
+
+      - run: . build/setup_virtualframebuffer.sh
       
       - save_cache: # saves the project dependencies
           paths:
