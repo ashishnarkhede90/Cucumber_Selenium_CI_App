@@ -19,18 +19,22 @@ jobs: # a collection of steps
       - run: mvn dependency:go-offline # gets the project dependencies
       
       # set up chrome driver
-      - run: chmod +x drivers/chromedriver_linux64 
-      - run: ls -lrt drivers/
-      - run: sudo chmod 777 drivers/chromedriver_linux64
-      - run: ls -lrt drivers/
+      # - run: chmod +x drivers/chromedriver_linux64 
+      # - run: ls -lrt drivers/
+      # - run: sudo chmod 777 drivers/chromedriver_linux64
+      # - run: ls -lrt drivers/
+
+      - run: . build/setup_chrome_driver.sh
 
       # install chrome 
-      - run: pwd
-      - run: sudo apt-get install libxss1 libappindicator1 libindicator7
-      - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      - run: sudo apt-get update
-      - run: sudo apt-get install -f
-      - run: sudo apt install ./google-chrome*.deb
+      # - run: pwd
+      # - run: sudo apt-get install libxss1 libappindicator1 libindicator7
+      # - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      # - run: sudo apt-get update
+      # - run: sudo apt-get install -f
+      # - run: sudo apt install ./google-chrome*.deb
+
+      - run: . build/install_chrome.sh
 
       # Set up virtual display
       # On CI server, there is no display output for the browser to launch in. To run the tests on a browser loaded in CI server, we need to configure 
