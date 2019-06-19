@@ -70,9 +70,16 @@ public class selenium {
 	  
 	 @Then("^response should contain \"([^\"]*)\"$")
 	 public void response_should_contain(String arg1) throws Throwable {
-	 if (!driver.getTitle().contains("Temp User"))
-	 throw new AssertionError();
-	 driver.close();
+		 System.out.println(driver.getTitle());
+		 
+		 if(driver.findElement(By.id("errorDiv_ep")) != null) {
+			 throw new AssertionError();
+		 }
+		 if (!driver.getTitle().contains("Temp User")) {
+			 throw new AssertionError();
+		 }
+		 
+		 driver.close();
 	 }
 	 
 	 @After
@@ -81,6 +88,7 @@ public class selenium {
 	       // Take a screenshot...
 	       final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 	       scenario.embed(screenshot, "image/png"); // ... and embed it in the report.
+	       driver.quit();
 	     }
 	 }
 }
